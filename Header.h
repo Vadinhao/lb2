@@ -25,7 +25,7 @@ private:
     double* angle;
     double Perimeter() const;
     double Square() const;
-    double * Angle(double* angl)const;
+    double* Angle(double* angl);
 public:
     Triangle();
     Triangle(double sides[]);
@@ -40,7 +40,7 @@ public:
     double Get_Square() const;
     double *Get_Angle() const;
     bool Istriangle() const;
-    void operator*(double k);
+    Triangle operator*(double k);
     string toString() const;
     friend Triangle operator*(double k, Triangle tr);
     friend ostream & operator<<(ostream & os, const Triangle & tr);

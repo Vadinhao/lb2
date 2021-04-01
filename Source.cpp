@@ -34,7 +34,7 @@ Triangle::Triangle(Triangle* triangle)
 
 Triangle::~Triangle()
 {
-    delete[] angle;
+    //
 }
 
 void Triangle::Set(double sides[])
@@ -83,11 +83,13 @@ bool Triangle::Istriangle() const
 	return (A + B > C) && (B + C > A) && (C + A > B);
 }
 
-void Triangle::operator*(double k)
+Triangle Triangle::operator*(double k)
 {
-    A = A * k;
-    B = B * k;
-    C = C * k;
+    Triangle temp(this);
+    temp.A = temp.A * k;
+    temp.B = temp.B * k;
+    temp.C = temp.C * k;
+    return temp;
 }
 
 Triangle operator*(double k, Triangle tr)
@@ -120,11 +122,10 @@ double Triangle::Perimeter() const
 double Triangle::Square() const
 {
     double p = Triangle::Perimeter() / 2;
-    cout << p << endl;
     return sqrt(p * (p - this->A) * (p - this->B) * (p - this->C));
 }
 
-double* Triangle::Angle(double* angl) const
+double* Triangle::Angle(double* angl)
 {
     angl[0] = 180 * acos((this->B * (this->B) + this->C * (this->C) - this->A * (this->A)) / (2 * (this->B) * (this->C))) / PI;
     angl[1] = 180 * acos((this->C * (this->C) + this->A * (this->A) - this->B * (this->B)) / (2 * (this->C) * (this->A))) / PI;
