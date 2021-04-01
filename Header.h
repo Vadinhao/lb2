@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-
 using std::cout;
 using std::cin;
 using std::endl;
@@ -19,30 +18,25 @@ private:
     double A;
     double B;
     double C;
-    double Perimeter;
-    double Square;
-    double* Angle;
-
-    void Perimeter();//2
-    void Square();//3
-    void Angle(double* angl);//4
-    bool Istriangle() const;
-
+    double perimeter;
+    double square;
+    double* angle;
+    void Perimeter();
+    void Square();
+    void Angle(double* angl);
 public:
     Triangle();
     Triangle(double* sides);
     Triangle(Triangle* triangle);
     ~Triangle();
-
+    
     void Set(double sides);
     double Get_A() const;
     double Get_B() const;
     double Get_C() const;
-
-    Triangle operator*(double k) const;//1
-    friend Triangle operator*(double k, const Triangle & tr);//1
-    void add_el(int pos);
-    void del_el(int pos);
-    string * toString() const;
+    bool Istriangle() const;
+    void operator*(double k);
+    friend void operator*(double k, const Triangle & tr);
+    string toString() const;
     friend ostram & operator<<(ostream & os, const & triangle);
 };
