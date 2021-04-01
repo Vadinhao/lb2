@@ -23,9 +23,9 @@ private:
     double perimeter;
     double square;
     double* angle;
-    double Perimeter();
-    double Square();
-    double * Angle(double* angl);
+    double Perimeter() const;
+    double Square() const;
+    double * Angle(double* angl)const;
 public:
     Triangle();
     Triangle(double sides[]);

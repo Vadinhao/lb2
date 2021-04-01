@@ -92,14 +92,12 @@ void Triangle::operator*(double k)
 
 Triangle operator*(double k, Triangle tr)
 {
-    Triangle temp = new Triangle(tr);
-    temp.A = temp.A * k;
-    temp.B = temp.B * k;
-    temp.C = temp.C * k;
+    double sides[3]{ tr.A * k, tr.B * k, tr.C * k };
+    Triangle temp = new Triangle(sides);
     return temp;
 }
 
-string Triangle::toString()const
+string Triangle::toString() const
 {
     string s1;
     std::ostringstream ostr;
@@ -114,19 +112,19 @@ ostream& operator<<(ostream& os, const Triangle& tr)
     return os;
 }
 
-double Triangle::Perimeter()
+double Triangle::Perimeter() const
 {
     return	this->A + this->B + this->C;
 }
 
-double Triangle::Square()
+double Triangle::Square() const
 {
     double p = Triangle::Perimeter() / 2;
     cout << p << endl;
     return sqrt(p * (p - this->A) * (p - this->B) * (p - this->C));
 }
 
-double* Triangle::Angle(double* angl)
+double* Triangle::Angle(double* angl) const
 {
     angl[0] = 180 * acos((this->B * (this->B) + this->C * (this->C) - this->A * (this->A)) / (2 * (this->B) * (this->C))) / PI;
     angl[1] = 180 * acos((this->C * (this->C) + this->A * (this->A) - this->B * (this->B)) / (2 * (this->C) * (this->A))) / PI;
