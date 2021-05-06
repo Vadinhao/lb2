@@ -5,9 +5,6 @@ Triangle::Triangle()
     A = 0;
     B = 0;
     C = 0;
-    perimeter = 0;
-    square = 0;
-    angle = new double[3]{0,0,0};
 }
 
 Triangle::Triangle(double sides[])
@@ -15,10 +12,6 @@ Triangle::Triangle(double sides[])
     A = sides[0];
     B = sides[1];
     C = sides[2];
-    perimeter = Perimeter();
-    square = Square();
-    angle = new double[3];
-    angle = Angle(angle);
 }
 
 Triangle::Triangle(Triangle* triangle)
@@ -26,10 +19,6 @@ Triangle::Triangle(Triangle* triangle)
     A = triangle->A;
     B = triangle->B;
     C = triangle->C;
-    perimeter = triangle->perimeter;
-    square = triangle->square;
-    angle = new double[3];
-    angle = triangle->angle;
 }
 
 Triangle::~Triangle()
@@ -42,10 +31,6 @@ void Triangle::Set(double sides[])
     A = sides[0];
     B = sides[1];
     C = sides[2];
-    perimeter = Perimeter();
-    square = Square();
-    angle = new double[3];
-    angle = Angle(angle);
 }
 
 double Triangle::Get_A() const
@@ -65,17 +50,27 @@ double Triangle::Get_C() const
 
 double Triangle::Get_Perimeter() const 
 {
-    return perimeter;
+    return this->Perimeter();
 }
 
 double Triangle::Get_Square() const
 {
-    return square;
+    return this->Square();
 }
 
-double* Triangle::Get_Angle() const
+double Triangle::Get_AngleA() const
 {
-    return angle;
+    return this->AngleA();
+}
+
+double Triangle::Get_AngleB() const
+{
+    return this->AngleB();
+}
+
+double Triangle::Get_AngleC() const
+{
+    return this->AngleC();
 }
 
 bool Triangle::Istriangle() const
@@ -103,14 +98,19 @@ string Triangle::toString() const
 {
     string s1;
     std::ostringstream ostr;
-    ostr << "A: " << A << ", B: " << B << ", C: " << C << "\nPerimeter: " << perimeter << "\nSquare: " << square << "\nAngles(a,b,c): " << angle[0] << ", " << angle[1] << ", " << angle[2];
+    ostr << "A: " << A << ", B: " << B << ", C: " << C << "\nPerimeter: " << this->Get_Perimeter() << "\nSquare: " << this->Get_Square() << "\nAngles(a,b,c): " << this->Get_AngleA() << ", " << this->Get_AngleB() << ", " << this->Get_AngleC();
     s1 = ostr.str();
     return s1; 
 }
 
+string to_string(const Triangle& tr) 
+{
+    return tr.toString();
+}
+
 ostream& operator<<(ostream& os, const Triangle& tr)
 {
-    os << "A: " << tr.A << ", B: " << tr.B << ", C: " << tr.C << "\nPerimeter: " << tr.perimeter << "\nSquare: " << tr.square << "\nAngles(a,b,c): " << tr.angle[0] << ", " << tr.angle[1] << ", " << tr.angle[2];
+    os  << tr.toString();
     return os;
 }
 
@@ -125,10 +125,17 @@ double Triangle::Square() const
     return sqrt(p * (p - this->A) * (p - this->B) * (p - this->C));
 }
 
-double* Triangle::Angle(double* angl)
+double Triangle::AngleA() const
 {
-    angl[0] = 180 * acos((this->B * (this->B) + this->C * (this->C) - this->A * (this->A)) / (2 * (this->B) * (this->C))) / PI;
-    angl[1] = 180 * acos((this->C * (this->C) + this->A * (this->A) - this->B * (this->B)) / (2 * (this->C) * (this->A))) / PI;
-    angl[2] = 180 * acos((this->A * (this->A) + this->B * (this->B) - this->C * (this->C)) / (2 * (this->A) * (this->B))) / PI;
-    return angl;
+    return 180 * acos((this->B * (this->B) + this->C * (this->C) - this->A * (this->A)) / (2 * (this->B) * (this->C))) / PI;
+}
+
+double Triangle::AngleB() const
+{
+    return 180 * acos((this->C * (this->C) + this->A * (this->A) - this->B * (this->B)) / (2 * (this->C) * (this->A))) / PI;
+}
+
+double Triangle::AngleC() const
+{
+    return 180 * acos((this->A * (this->A) + this->B * (this->B) - this->C * (this->C)) / (2 * (this->A) * (this->B))) / PI;
 }

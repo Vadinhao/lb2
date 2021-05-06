@@ -73,7 +73,7 @@ int main()
             {
                 cout << "Ваши треугольники и их парамеры: " << endl;
                 for (int i = 0; i < vec_triangle.size(); i++)
-                    cout << "*******************\n" << "*" << i + 1 << "*\n" << vec_triangle[i].toString() << "\n*******************" << endl;
+                    cout << "*******************\n" << "*" << i + 1 << "*\n" << to_string(vec_triangle[i]) << "\n*******************" << endl;
             }
             else if (ch == 3)
             {
